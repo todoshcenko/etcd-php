@@ -73,10 +73,10 @@ class EtcdExportCommand extends Command
                 throw new \RuntimeException('Unknown format: ' . $input->getOption('format'));
         }
 
-
-        if ($input->hasOption('output')) {
+        $file = $input->getOption('output');
+        if (!is_null($file)) {
             $fs = new Filesystem();
-            $fs->dumpFile($input->getOption('output'), $result . PHP_EOL);
+            $fs->dumpFile($file, $result . PHP_EOL);
         } else {
             $output->writeln($result);
         }
